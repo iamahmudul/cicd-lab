@@ -39,3 +39,17 @@ test('GET /api/health returns a healthy response', async () => {
     status: 'ok',
   });
 });
+
+test('GET / renders the application version', async () => {
+  const response = await fetch(`${baseUrl}/`);
+
+  assert.equal(response.status, 200);
+  assert.match(await response.text(), /Version development/);
+});
+
+test('GET /styles.css serves the application stylesheet', async () => {
+  const response = await fetch(`${baseUrl}/styles.css`);
+
+  assert.equal(response.status, 200);
+  assert.match(await response.text(), /background-color/);
+});
